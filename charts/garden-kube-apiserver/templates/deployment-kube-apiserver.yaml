@@ -37,7 +37,7 @@ spec:
         checksum/secret-kube-apiserver-static-token: {{ include (print $.Template.BasePath "/secret-kube-apiserver-static-token.yaml") . | sha256sum }}
         checksum/secret-kube-controller-manager-client: {{ include (print $.Template.BasePath "/secret-kube-controller-manager-tls.yaml") . | sha256sum }}
         checksum/secret-service-account-key: {{ include (print $.Template.BasePath "/secret-service-account-key.yaml") . | sha256sum }}
-        {{- if .Values.tls.identity.ca }}
+        {{- if ((((.Values).tls).identity).ca) }}
         checksum/secret-identity-ca: {{ include (print $.Template.BasePath "/secret-identity-ca.yaml") . | sha256sum }}
         {{- end }}
       labels:
@@ -101,7 +101,7 @@ spec:
         - --oidc-client-id=kube-kubectl
         - --oidc-username-claim=email
         - --oidc-groups-claim=groups
-        {{- if .Values.tls.identity.ca }}
+        {{- if ((((.Values).tls).identity).ca) }}
         - --oidc-ca-file=/srv/kubernetes/identity-ca/ca.crt
         {{- end }}
 {{ end }}
@@ -177,7 +177,7 @@ spec:
           mountPath: /srv/kubernetes/token
         - name: kube-aggregator
           mountPath: /srv/kubernetes/aggregator
-        {{- if .Values.tls.identity.ca }}
+        {{- if ((((.Values).tls).identity).ca) }}
         - name: ca-identity
           mountPath: /srv/kubernetes/identity-ca
         {{- end }}
@@ -230,7 +230,7 @@ spec:
       - name: ca-kube-apiserver
         secret:
           secretName: garden-kube-apiserver-ca
-      {{- if .Values.tls.identity.ca }}
+      {{- if ((((.Values).tls).identity).ca) }}
       - name: ca-identity
         secret:
           secretName: identity-ca
