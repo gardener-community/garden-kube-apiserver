@@ -16,7 +16,7 @@ namespace: xxx
 serviceName: garden-kube-apiserver
 images:
   apiserver: k8s.gcr.io/kube-apiserver:v1.26.0
-  controllermanager: k8s.gcr.io/kube-controller-manager:v1.24.4
+  controllermanager: k8s.gcr.io/kube-controller-manager:v1.26.0
 
 replicas: 3
 apiServer:
