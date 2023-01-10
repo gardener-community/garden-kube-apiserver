@@ -1,0 +1,25 @@
+{
+  "automerge": "true",
+  "platformAutomerge": "true",
+  "prHourlyLimit": 0,
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "values.yaml"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver-coerced",
+      "matchStrings": [
+        // https://regex101.com/r/oimJd1/1
+        "(?<depName>k8s\\.gcr\\.io\\/kube-apiserver):(?<currentValue>v[0-9.a-z-]+)",
+        "(?<depName>k8s\\.gcr\\.io\\/kube-controller-manager):(?<currentValue>v[0-9.a-z-]+)"
+      ]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "includeForks": true,
+  "enabledManagers": ["regex"],
+  "prCreation": "immediate"
+}
